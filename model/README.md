@@ -1,0 +1,1 @@
+https://hf-mirror.com/timm/vit_base_patch8_224.augreg2_in21k_ft_in1k/tree/main
