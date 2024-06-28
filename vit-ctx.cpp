@@ -909,10 +909,13 @@ bool vit_predict(const vit_model &model, const image_f32 img, const vit_default_
     ggml_build_forward_expand(gf, probs);
     ggml_graph_compute_with_ctx(ctx0, gf, params.n_threads);
 
+    // get the result
     const float * probs_data = ggml_get_data_f32(probs);
-    const int index = std::max_element(probs_data, probs_data + 10) - probs_data;
 
-    printf("predict label: %s, prob: %.2f\n", model.hparams.id2label.at(index).c_str(), probs_data[index]);
+    for (int i = 0; i < model.hparams.num_classes; ++i)
+    {
+        predictions.push_back(std::make_pair(probs_data[i], i));
+    }
 
     ggml_free(ctx0);
 
@@ -977,10 +980,18 @@ int main(int argc, char **argv)
     // predict for single image
     vit_predict(model, img_f32, params, predictions);
 
+    // print result
+    std::sort(predictions.begin(), predictions.end(),
+              [](const std::pair<float, int> &a, const std::pair<float, int> &b)
+              {
+                  return a.first > b.first;
+              });
+    printf("predict label: %s, prob: %.6f\n", model.hparams.id2label.at(predictions[0].second).c_str(), predictions[0].first);
+
     // report timing
     {
         const int64_t t_main_end_us = ggml_time_us();
-        fprintf(stderr, "\n\n");
+        fprintf(stderr, "\n");
         fprintf(stderr, "%s:    model load time = %8.2f ms\n", __func__, t_load_us / 1000.0f);
         fprintf(stderr, "%s:    processing time = %8.2f ms\n", __func__, (t_main_end_us - t_main_start_us - t_load_us) / 1000.0f);
         fprintf(stderr, "%s:    total time      = %8.2f ms\n", __func__, (t_main_end_us - t_main_start_us) / 1000.0f);
