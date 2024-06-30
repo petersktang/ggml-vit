@@ -9,7 +9,6 @@ git clone --recurse-submodules https://github.com/staghado/vit.cpp.git
 ```
 
 # convert model
-转化model
 ````
 # https://hf-mirror.com/timm/vit_base_patch8_224.augreg2_in21k_ft_in1k/tree/main
 python convert-pth-to-ggml.py --model_name vit_base_patch8_224.augreg2_in21k_ft_in1k
