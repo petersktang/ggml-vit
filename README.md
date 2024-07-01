@@ -5,7 +5,7 @@
 
 # clone本项目
 ```
-git clone --recurse-submodules https://github.com/staghado/vit.cpp.git
+git clone --recurse-submodules https://github.com/wwwsctvcom/ggml-vit.git
 ```
 
 # convert model
