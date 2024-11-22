@@ -23,7 +23,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native")
 add_subdirectory(ggml)
 
 # vit-ctx executable
-add_executable(vit-ctx main-ctx.cpp vit-ctx.cpp)
+add_executable(vit-ctx vit-ctx.cpp)
 target_link_libraries(vit-ctx PUBLIC ggml)
 target_include_directories(vit-ctx PUBLIC .)
 target_compile_features(vit-ctx PUBLIC cxx_std_11)

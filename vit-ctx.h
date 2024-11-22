@@ -1,7 +1,8 @@
 #pragma once
 
-#include "ggml/ggml.h"
-#include "ggml/ggml-alloc.h"
+#include "ggml.h"
+#include "ggml-alloc.h"
+#include "ggml-cpu.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "ggml/examples/stb_image.h" 
