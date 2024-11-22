@@ -11,6 +11,7 @@ git clone --recurse-submodules https://github.com/wwwsctvcom/ggml-vit.git
 # convert model
 ````
 # https://hf-mirror.com/timm/vit_base_patch8_224.augreg2_in21k_ft_in1k/tree/main
+# huggingface-cli download timm/vit_base_patch8_224.augreg2_in21k_ft_in1k --local-dir=model
 python convert-pth-to-ggml.py --model_name vit_base_patch8_224.augreg2_in21k_ft_in1k
 ````
 
